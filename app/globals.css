@@ -1,0 +1,136 @@
+:root {
+  --bg: #f4f7fb;
+  --bg-alt: #e9eef6;
+  --surface: #ffffff;
+  --border: #d7e0eb;
+  --text-primary: #122236;
+  --accent: #1f6feb;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: "Azo Sans", "AzoSans", "Segoe UI", "Trebuchet MS", sans-serif;
+  color: var(--text-primary);
+  background:
+    radial-gradient(circle at 10% 0%, rgba(31, 111, 235, 0.12), transparent 35%),
+    radial-gradient(circle at 90% 10%, rgba(15, 118, 110, 0.08), transparent 30%),
+    linear-gradient(180deg, var(--bg), var(--bg-alt));
+}
+
+h1,
+h2,
+h3 {
+  margin: 0;
+  color: var(--text-primary);
+  font-family: "Azo Sans", "AzoSans", "Segoe UI", "Trebuchet MS", sans-serif;
+  letter-spacing: 0.01em;
+}
+
+a {
+  color: inherit;
+}
+
+.container {
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.panel {
+  background: var(--surface);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  padding: 24px;
+  box-shadow: 0 8px 24px rgba(18, 34, 54, 0.06);
+}
+
+.grid {
+  display: grid;
+  gap: 16px;
+}
+
+.button {
+  border: 1px solid transparent;
+  background: var(--accent);
+  color: #ffffff;
+  padding: 10px 14px;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.button.secondary {
+  background: #165bc0;
+}
+
+.button.ghost {
+  background: #edf2f8;
+  border-color: #d2ddea;
+  color: var(--text-primary);
+}
+
+.toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.input,
+.select {
+  width: 100%;
+  border: 1px solid #c7d5e4;
+  border-radius: 8px;
+  padding: 10px;
+  font: inherit;
+  background: #ffffff;
+  color: var(--text-primary);
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(10, 21, 33, 0.55);
+  display: grid;
+  place-items: center;
+  z-index: 50;
+  padding: 16px;
+}
+
+.modal {
+  width: min(580px, 100%);
+  border-radius: 14px;
+  padding: 20px;
+  background: #ffffff;
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  box-shadow: 0 20px 40px rgba(18, 34, 54, 0.16);
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+}
+
+.row > * {
+  flex: 1;
+}
+
+@media (max-width: 720px) {
+  .container {
+    padding: 12px;
+  }
+
+  .panel {
+    padding: 16px;
+  }
+
+  .row {
+    flex-direction: column;
+  }
+}

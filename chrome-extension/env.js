@@ -1,0 +1,4 @@
+export const EXTENSION_ENV = {
+  NEXT_PUBLIC_SUPABASE_URL: "https://xaybzwbiryncqltcpsmg.supabase.co",
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InhheWJ6d2JpcnluY3FsdGNwc21nIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQ2MjU3MjYsImV4cCI6MjA5MDIwMTcyNn0.QznsAWPxmNV6Hf396kqZ5AQelsRxTxF7UzSgg_mLTMg"
+};

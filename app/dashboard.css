@@ -1,0 +1,648 @@
+.dojo-dashboard {
+  --dashboard-page-padding: clamp(10px, 3vw, 40px);
+  border-radius: 0;
+  padding-top: 14px;
+  padding-bottom: 16px;
+  width: 100vw;
+  max-width: none;
+  min-height: 100vh;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: var(--dashboard-page-padding);
+  padding-right: var(--dashboard-page-padding);
+  align-content: start;
+  grid-auto-rows: max-content;
+}
+
+.dojo-dashboard-sensei {
+  background: linear-gradient(180deg, #2b2b2b 0%, #000000 100%);
+}
+
+.dojo-dashboard-sensei .roster-list {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+.dojo-dashboard-sensei .roster-row {
+  grid-template-columns: 1fr;
+  border-radius: 14px;
+  padding: 10px;
+  gap: 8px;
+}
+
+.dojo-dashboard-sensei .roster-name {
+  grid-template-columns: 36px 1fr;
+  column-gap: 8px;
+  row-gap: 2px;
+}
+
+.dojo-dashboard-sensei .roster-belt-logo {
+  width: 36px;
+  height: 36px;
+}
+
+.dojo-dashboard-sensei .roster-full-name-main {
+  font-size: 1.08rem;
+  line-height: 1.15;
+}
+
+.dojo-dashboard-sensei .roster-live {
+  font-size: 0.72rem;
+  line-height: 1.1;
+}
+
+.dojo-dashboard-sensei .roster-curriculum {
+  margin-left: 0;
+  font-size: 0.95rem;
+  line-height: 1.15;
+  font-weight: 700;
+}
+
+.dojo-dashboard-sensei .roster-points {
+  margin-left: 0;
+  font-size: 0.86rem;
+  font-weight: 700;
+}
+
+.dojo-dashboard-sensei .roster-progress-full {
+  padding: 0;
+}
+
+.dojo-dashboard-sensei .progress-track {
+  height: 8px;
+}
+
+.dojo-dashboard-sensei .roster-warning {
+  padding: 0;
+  margin-top: 0;
+}
+
+.dojo-dashboard-tv {
+  --dashboard-page-padding: clamp(14px, 6vw, 96px);
+  --dashboard-split: min(336px, 100%);
+  --roster-panel-padding: 24px;
+  --roster-panel-split: calc(var(--dashboard-split) + var(--roster-panel-padding));
+  --dashboard-frame-width: min(1200px, calc(100vw - (2 * var(--dashboard-page-padding))));
+  --dashboard-page-split: calc(((100vw - var(--dashboard-frame-width)) / 2) + var(--roster-panel-split));
+  background: linear-gradient(90deg, #1b1b1b 0 var(--dashboard-page-split), #2e2e2e var(--dashboard-page-split) 100%);
+  padding-top: 30px;
+  padding-bottom: 34px;
+}
+
+.dashboard-hero {
+  display: grid;
+  gap: 10px;
+  background: #05060a;
+  border: none;
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  align-self: start;
+  height: fit-content;
+}
+
+.dashboard-hero::before {
+  content: none;
+}
+
+.dojo-dashboard-tv .dashboard-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #313131 0 var(--roster-panel-split), transparent var(--roster-panel-split) 100%);
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.dojo-dashboard-tv .dashboard-hero {
+  gap: 20px;
+  padding-top: 18px;
+  padding-bottom: 18px;
+}
+
+.dojo-dashboard-tv .dashboard-title {
+  font-size: clamp(1.8rem, 3vw, 2.5rem);
+}
+
+.dashboard-title {
+  font-size: clamp(1.35rem, 2.1vw, 1.9rem);
+  font-weight: 800;
+  color: #ebebeb;
+  background: transparent;
+  border-radius: 0;
+  padding: 0;
+}
+
+.dashboard-title-centered {
+  text-align: center;
+}
+
+.roster-panel {
+  display: grid;
+  gap: 8px;
+  background: #05060a;
+  border: none;
+  width: 1200px;
+  max-width: 100%;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.loading-panel {
+  min-height: 140px;
+  display: grid;
+  place-items: center;
+}
+
+.loading-text {
+  margin: 0;
+  color: #ebebeb;
+  font-size: 1.4rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.roster-panel::before {
+  content: none;
+}
+
+.dojo-dashboard-tv .roster-panel::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #676767 0 var(--roster-panel-split), transparent var(--roster-panel-split) 100%);
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.dojo-dashboard-tv .roster-panel {
+  gap: 14px;
+}
+
+.dojo-dashboard-tv .roster-list {
+  gap: 16px;
+}
+
+.dojo-dashboard-tv .roster-row {
+  grid-template-columns: 336px 1fr;
+  border-radius: 28px;
+}
+
+.roster-list {
+  display: grid;
+  gap: 8px;
+}
+
+.roster-row {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 0;
+  border-radius: 16px;
+  overflow: hidden;
+  background: #05060a;
+  position: relative;
+  isolation: isolate;
+}
+
+.roster-row::before {
+  content: none;
+}
+
+.dojo-dashboard-tv .roster-row::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #676767 0 var(--dashboard-split), transparent var(--dashboard-split) 100%);
+  mix-blend-mode: difference;
+  pointer-events: none;
+}
+
+.dojo-dashboard-tv .roster-left-box {
+  padding: 18px 20px;
+}
+
+.dojo-dashboard-tv .roster-right-box {
+  padding: 18px 22px;
+  gap: 10px;
+}
+
+.dojo-dashboard-tv .roster-meta-line {
+  gap: 16px;
+}
+
+.dojo-dashboard-tv .roster-name {
+  grid-template-columns: 52px 1fr;
+  column-gap: 10px;
+  row-gap: 6px;
+}
+
+.dojo-dashboard-tv .roster-belt-logo {
+  width: 52px;
+  height: 52px;
+}
+
+.dojo-dashboard-tv .roster-full-name-main {
+  font-size: 2rem;
+  line-height: normal;
+}
+
+.dojo-dashboard-tv .roster-live {
+  font-size: 0.9rem;
+  line-height: normal;
+}
+
+.dojo-dashboard-tv .roster-curriculum {
+  font-size: 1.9rem;
+  line-height: 1.15;
+  margin-left: 20px;
+  font-weight: 400;
+}
+
+.dojo-dashboard-tv .roster-progress-full {
+  padding: 2px 20px 8px;
+}
+
+.dojo-dashboard-tv .roster-points {
+  font-size: 1.05rem;
+}
+
+.dojo-dashboard-tv .roster-warning {
+  margin: 4px 0 0;
+  font-size: 0.82rem;
+  padding: 0 20px 10px;
+}
+
+.dojo-dashboard-tv .progress-track {
+  height: 14px;
+}
+
+.roster-left-box {
+  padding: 9px 12px;
+  position: relative;
+  z-index: 1;
+}
+
+.roster-right-box {
+  padding: 9px 12px;
+  display: grid;
+  gap: 4px;
+  position: relative;
+  z-index: 1;
+}
+
+.roster-meta-line {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.roster-touch {
+  all: unset;
+  cursor: pointer;
+  display: block;
+}
+
+.roster-touch:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+.roster-name {
+  display: grid;
+  grid-template-columns: 34px 1fr;
+  column-gap: 8px;
+  row-gap: 2px;
+  align-items: center;
+}
+
+.roster-belt-logo {
+  width: 34px;
+  height: 34px;
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.roster-full-name-main {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: #ebebeb;
+  grid-column: 2;
+  line-height: 1.1;
+}
+
+.roster-live {
+  font-size: 0.72rem;
+  font-weight: 700;
+  grid-column: 2;
+  line-height: 1;
+}
+
+.roster-live.live {
+  color: #02e811;
+}
+
+.roster-live.inactive {
+  color: #ff4545;
+}
+
+.roster-curriculum {
+  color: #ebebeb;
+  font-size: 1.05rem;
+  line-height: 1.05;
+  text-align: left;
+  flex: 0 1 auto;
+  margin-left: 0;
+  font-weight: 700;
+}
+
+.roster-progress {
+  width: 100%;
+}
+
+.roster-progress-full {
+  grid-column: 1 / -1;
+  padding: 0 12px 7px;
+  position: relative;
+  z-index: 1;
+}
+
+.roster-points {
+  font-weight: 500;
+  color: #ebebeb;
+  font-size: 0.86rem;
+  white-space: nowrap;
+  margin-left: auto;
+}
+
+.roster-warning {
+  margin: 2px 0 0;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #ff6b6b;
+  grid-column: 1 / -1;
+  padding: 0 12px 8px;
+  position: relative;
+  z-index: 1;
+}
+
+.progress-track {
+  display: flex;
+  width: 100%;
+  height: 9px;
+  border-radius: 999px;
+  overflow: hidden;
+  background: #585656;
+  --belt-before: #d0d0d0;
+  --belt-today: #ffffff;
+}
+
+.segment-before {
+  background: var(--belt-before);
+}
+
+.segment-today {
+  background: var(--belt-today);
+}
+
+.segment-remaining {
+  background: #585656;
+}
+
+.belt-white {
+  --belt-before: #d0d0d0;
+  --belt-today: #ffffff;
+}
+
+.belt-yellow {
+  --belt-before: #e7d400;
+  --belt-today: #e5ff00;
+}
+
+.belt-orange {
+  --belt-before: #d65007;
+  --belt-today: #ff6a00;
+}
+
+.belt-green {
+  --belt-before: #049e06;
+  --belt-today: #02e811;
+}
+
+.belt-blue {
+  --belt-before: #618fe5;
+  --belt-today: #0252e8;
+}
+
+.belt-default {
+  --belt-before: #d0d0d0;
+  --belt-today: #ffffff;
+}
+
+.modal-dashboard-theme {
+  background: #0b0d13;
+  color: #ebebeb;
+  border: 1px solid #3a3e4a;
+}
+
+.modal-dashboard-theme h2,
+.modal-dashboard-theme p,
+.modal-dashboard-theme label {
+  color: #ebebeb;
+}
+
+.modal-dashboard-theme label {
+  padding-left: 8px;
+}
+
+.modal-dashboard-theme .select,
+.modal-dashboard-theme .input {
+  background: #151925;
+  border-color: #3a3e4a;
+  color: #ebebeb;
+}
+
+.modal-dashboard-theme .button.ghost {
+  background: #2a2f3d;
+  border-color: #3a3e4a;
+  color: #ebebeb;
+}
+
+.modal-dashboard-error {
+  color: #ff6b6b;
+  margin-top: 8px;
+}
+
+.modal-rating-row {
+  margin-top: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.modal-rating-label {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.modal-rating-select {
+  width: 84px;
+  text-align: center;
+}
+
+.modal-actions-centered {
+  justify-content: center;
+}
+
+.modal-complete-lesson {
+  text-align: center;
+}
+
+.modal-complete-title,
+.modal-complete-subtext,
+.modal-complete-points,
+.modal-rating-label,
+.modal-rating-value {
+  text-align: center;
+}
+
+.modal-slider-group {
+  margin-top: 14px;
+  display: grid;
+  gap: 8px;
+  justify-items: center;
+}
+
+.modal-rating-slider {
+  width: min(320px, 100%);
+}
+
+.modal-rating-value {
+  margin: 0;
+  font-weight: 700;
+}
+
+.modal-points-chart {
+  width: min(760px, 92vw);
+  text-align: center;
+}
+
+.modal-points-title,
+.modal-points-subtext,
+.modal-points-footnote {
+  text-align: center;
+}
+
+.modal-points-subtext {
+  margin-top: 4px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.modal-points-chart-svg {
+  width: 100%;
+  height: 260px;
+}
+
+.modal-points-axis {
+  stroke: #585656;
+  stroke-width: 1;
+}
+
+.modal-points-line {
+  stroke: #02e811;
+  stroke-width: 3;
+  vector-effect: non-scaling-stroke;
+}
+
+.modal-points-marker {
+  fill: #02e811;
+}
+
+.modal-points-guide-line {
+  stroke: #9ba0ac;
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+
+.modal-points-increase-line {
+  stroke: #9ba0ac;
+  stroke-width: 1;
+}
+
+.modal-points-axis-tick {
+  stroke: #7a7f8d;
+  stroke-width: 1;
+}
+
+.modal-points-axis-label {
+  fill: #b5b8c4;
+  font-size: 12px;
+  font-weight: 600;
+  text-anchor: end;
+}
+
+.modal-points-x-axis-label {
+  fill: #b5b8c4;
+  font-size: 11px;
+  font-weight: 600;
+  text-anchor: middle;
+}
+
+.modal-points-footnote {
+  margin-top: 8px;
+  margin-bottom: 0;
+  color: #b5b8c4;
+  font-size: 0.85rem;
+}
+
+@media (max-width: 720px) {
+  .dojo-dashboard-tv {
+    --roster-panel-padding: 16px;
+    --dashboard-split: 100%;
+    --dashboard-page-split: 100%;
+  }
+
+  .roster-row {
+    grid-template-columns: 1fr;
+  }
+
+  .roster-warning {
+    grid-column: 1;
+  }
+
+  .roster-curriculum {
+    font-size: 0.95rem;
+  }
+
+  .dojo-dashboard-tv .roster-curriculum {
+    font-size: 1.25rem;
+  }
+
+  .dojo-dashboard-sensei .roster-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 1200px) {
+  .dojo-dashboard-sensei .roster-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 920px) {
+  .dojo-dashboard-sensei .roster-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}

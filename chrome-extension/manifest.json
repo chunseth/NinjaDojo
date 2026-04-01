@@ -1,0 +1,27 @@
+{
+  "manifest_version": 3,
+  "name": "NinjaDojo Sensei Bridge",
+  "version": "0.1.0",
+  "description": "Extract active kids from Sensei portal and sync to Supabase.",
+  "permissions": ["storage", "tabs"],
+  "host_permissions": [
+    "https://sensei.codeninjas.com/*",
+    "https://*.supabase.co/*"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": [
+        "https://sensei.codeninjas.com/live-ninjas*",
+        "https://sensei.codeninjas.com/live-ninjas/*",
+        "https://sensei.codeninjas.com/my-ninjas*",
+        "https://sensei.codeninjas.com/my-ninjas/*"
+      ],
+      "js": ["content.js"],
+      "run_at": "document_idle"
+    }
+  ]
+}

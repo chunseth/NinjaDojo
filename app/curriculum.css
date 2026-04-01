@@ -1,0 +1,26 @@
+.curriculum-page .curriculum-title {
+  font-size: 3rem;
+}
+
+.curriculum-page .curriculum-section-title {
+  font-size: 2rem;
+}
+
+.curriculum-page .level-count-label {
+  margin-top: 4px;
+  font-weight: 700;
+}
+
+.curriculum-page .row-end {
+  display: flex;
+  align-items: flex-end;
+}
+
+.curriculum-page .snapshot-belt {
+  border-top: 1px solid #cbd5e1;
+  padding-top: 8px;
+}
+
+.curriculum-page .snapshot-level {
+  margin: 6px 0;
+}
