@@ -141,15 +141,9 @@ export async function fetchTodayDashboard(): Promise<{
   const activeRowsForToday = ((activeRows ?? []) as ActiveSessionRow[]).filter(
     (row) => chicagoDateForIso(row.observed_at) === today
   );
-  const namesWithActiveToday = new Set(
-    activeRowsForToday.filter((row) => row.source_status === "active").map((row) => row.normalized_name)
-  );
 
   const latestByName = new Map<string, ActiveSessionRow>();
   for (const row of activeRowsForToday) {
-    if (row.source_status === "inactive" && !namesWithActiveToday.has(row.normalized_name)) {
-      continue;
-    }
     if (!latestByName.has(row.normalized_name)) {
       latestByName.set(row.normalized_name, row);
     }

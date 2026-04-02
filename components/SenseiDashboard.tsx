@@ -4,6 +4,7 @@ import { useState } from "react";
 import { CompleteLessonModal } from "@/components/CompleteLessonModal";
 import { CurriculumSetupModal } from "@/components/CurriculumSetupModal";
 import { UnknownStudentModal } from "@/components/UnknownStudentModal";
+import { AutoFitText } from "@/components/AutoFitText";
 import { useDashboardData } from "@/lib/hooks/useDashboardData";
 import type { StudentProgressSnapshot } from "@/lib/types";
 
@@ -98,10 +99,10 @@ function curriculumStatus(student: StudentProgressSnapshot): string {
   const lessonNumber = student.curriculum.lesson_number;
   const totalLessons = student.progress.total > 0 ? student.progress.total : null;
   if (!level || !lessonNumber || !totalLessons) {
-    return "L- | -/-";
+    return "Level - | Lesson -/-";
   }
 
-  return `L${level} | ${lessonNumber}/${totalLessons}`;
+  return `Level ${level} | Lesson ${lessonNumber}/${totalLessons}`;
 }
 
 export function SenseiDashboard() {
@@ -154,10 +155,11 @@ export function SenseiDashboard() {
                   src={beltLogoPath(student.curriculum.belt_code)}
                   alt={`${student.curriculum.belt_code ?? "unassigned"} belt ninja`}
                 />
-                <span className="roster-full-name-main">{student.full_name}</span>
-                <span className={`roster-live ${student.active_status === "active" ? "live" : "inactive"}`}>
-                  {student.active_status === "active" ? "Live" : "Inactive"}
-                </span>
+                <AutoFitText
+                  className={`roster-full-name-main ${student.active_status === "active" ? "is-active" : "is-inactive"}`}
+                  text={student.full_name}
+                  minFontPx={9}
+                />
               </button>
 
               <button
@@ -180,7 +182,7 @@ export function SenseiDashboard() {
                   }
                 }}
               >
-                +{student.points.points_month} Points
+                +{student.points.points_today} Points
               </button>
 
               <button
@@ -252,23 +254,26 @@ export function SenseiDashboard() {
                 ? [1, 2, 3, 4, 5]
                 : [1, 2, 3, 4, 5].map((multiplier) => earnedStep * multiplier);
               const chartMax = yTicks[yTicks.length - 1] ?? 5;
-              const stepX = chartPoints.length > 1 ? chartWidth / (chartPoints.length - 1) : 0;
-              const polylinePoints = chartPoints
-                .map((point, index) => {
-                  const x = chartPoints.length > 1 ? index * stepX : chartWidth / 2;
-                  const y = chartHeight - (point.cumulative_points / chartMax) * chartHeight;
-                  return `${x + 40},${Math.max(20, y + 20)}`;
-                })
-                .join(" ");
-              const markerPoints = chartPoints.map((point, index) => {
-                const x = chartPoints.length > 1 ? index * stepX : chartWidth / 2;
+              const chartSeries = [
+                { cumulative_points: 0, sign_in_date: "0", isOrigin: true },
+                ...chartPoints.map((point) => ({ ...point, isOrigin: false }))
+              ];
+              const stepX = chartSeries.length > 1 ? chartWidth / (chartSeries.length - 1) : 0;
+              const markerPoints = chartSeries.map((point, index) => {
+                const x = chartSeries.length > 1 ? index * stepX : 0;
                 const y = chartHeight - (point.cumulative_points / chartMax) * chartHeight;
                 return {
                   x: x + 40,
                   y: Math.max(20, y + 20),
-                  date: point.sign_in_date
+                  date: point.sign_in_date,
+                  isOrigin: point.isOrigin
                 };
               });
+              const polylinePoints = markerPoints
+                .map((point) => {
+                  return `${point.x},${point.y}`;
+                })
+                .join(" ");
 
               return (
                 <>
@@ -295,17 +300,12 @@ export function SenseiDashboard() {
                   </g>
                 );
               })}
-              <polyline className="modal-points-line" fill="none" points={polylinePoints} />
-              {markerPoints.map((point, index) => (
-                <line
-                  key={`increase-${index}`}
-                  x1="40"
-                  y1="220"
-                  x2={point.x}
-                  y2={point.y}
-                  className="modal-points-increase-line"
-                />
-              ))}
+              <polyline
+                className="modal-points-line"
+                fill="none"
+                points={polylinePoints}
+                style={{ stroke: beltPointColor(pointsModalStudent.curriculum.belt_code) }}
+              />
               {markerPoints.map((point, index) => (
                 <line
                   key={`y-guide-${index}`}
@@ -330,7 +330,7 @@ export function SenseiDashboard() {
                 <g key={`x-tick-${index}`}>
                   <line x1={point.x} y1="220" x2={point.x} y2="226" className="modal-points-axis-tick" />
                   <text x={point.x} y="240" className="modal-points-x-axis-label">
-                    {formatSessionDateTick(point.date)}
+                    {point.isOrigin ? "0" : formatSessionDateTick(point.date)}
                   </text>
                 </g>
               ))}

@@ -34,7 +34,9 @@
 .dojo-dashboard-sensei .roster-name {
   grid-template-columns: 36px 1fr;
   column-gap: 8px;
-  row-gap: 2px;
+  row-gap: 0;
+  width: fit-content;
+  justify-self: center;
 }
 
 .dojo-dashboard-sensei .roster-belt-logo {
@@ -57,12 +59,16 @@
   font-size: 0.95rem;
   line-height: 1.15;
   font-weight: 700;
+  width: 100%;
+  text-align: center;
 }
 
 .dojo-dashboard-sensei .roster-points {
   margin-left: 0;
   font-size: 0.86rem;
   font-weight: 700;
+  width: 100%;
+  text-align: center;
 }
 
 .dojo-dashboard-sensei .roster-progress-full {
@@ -241,7 +247,7 @@
 .dojo-dashboard-tv .roster-name {
   grid-template-columns: 52px 1fr;
   column-gap: 10px;
-  row-gap: 6px;
+  row-gap: 0;
 }
 
 .dojo-dashboard-tv .roster-belt-logo {
@@ -322,7 +328,7 @@
   display: grid;
   grid-template-columns: 34px 1fr;
   column-gap: 8px;
-  row-gap: 2px;
+  row-gap: 0;
   align-items: center;
 }
 
@@ -330,7 +336,7 @@
   width: 34px;
   height: 34px;
   grid-column: 1;
-  grid-row: 1 / span 2;
+  grid-row: 1;
 }
 
 .roster-full-name-main {
@@ -339,6 +345,18 @@
   color: #ebebeb;
   grid-column: 2;
   line-height: 1.1;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  white-space: nowrap;
+}
+
+.roster-full-name-main.is-active {
+  color: #02e811;
+}
+
+.roster-full-name-main.is-inactive {
+  color: #ff4545;
 }
 
 .roster-live {
